@@ -104,4 +104,18 @@ class JokesApiApplicationTests
         response = rest.exchange(endpoint, HttpMethod.GET, request, Joke.class);
         assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
     }
+
+    @Test
+    public void getMissingJokeById()
+    {
+        String endpoint = "http://localhost:" + port + "/jokes/6000";
+
+        //set JSON header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity request = new HttpEntity(headers);
+        ResponseEntity<Joke> response = rest.exchange(endpoint, HttpMethod.GET, request, Joke.class);
+        assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+    }
 }
